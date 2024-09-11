@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.codingfuture.erp.mapper.OrderMapper">
+    <select id="selectOrdersByPage" parameterType="map" resultType="com.codingfuture.erp.entity.Order">
+        SELECT
+        o.uuid AS uuid,
+        o.create_time AS createtime,
+        o.check_time AS checktime,
+        o.start_time AS starttime,
+        o.end_time AS endtime,
+        o.type AS type,
+        e1.username AS creatername,
+        e2.username AS checkername,
+        e3.username AS startername,
+        e4.username AS endername,
+        s.name AS suppliername,
+        o.supplier_uuid AS supplieruuid,
+        o.total_money AS totalmoney,
+        o.state AS state,
+        o.waybills AS waybills,
+        o.score AS score
+        FROM
+        orders o
+        LEFT JOIN emp e1 ON o.creater = e1.uuid
+        LEFT JOIN emp e2 ON o.checker = e2.uuid
+        LEFT JOIN emp e3 ON o.starter = e3.uuid
+        LEFT JOIN emp e4 ON o.ender = e4.uuid
+        LEFT JOIN supplier s ON o.supplier_uuid = s.uuid
+        <where>
+            <if test="state != null">
+                AND o.state = #{state}
+            </if>
+        </where>
+        ORDER BY o.create_time DESC
+        LIMIT #{offset}, #{limit}
+    </select>
+
+    <select id="countOrders" parameterType="map" resultType="Long">
+        SELECT COUNT(*)
+        FROM orders o
+        <where>
+            <if test="state != null">
+                AND o.state = #{state}
+            </if>
+        </where>
+    </select>
+
+    <insert id="insertOrder" parameterType="com.codingfuture.erp.entity.Order">
+        INSERT INTO orders (create_time, creater, supplier_uuid, total_money, state)
+        VALUES (#{createTime}, #{creater}, #{supplierUuid}, #{totalMoney}, #{state})
+        <selectKey keyProperty="uuid" resultType="long" order="AFTER">
+            SELECT LAST_INSERT_ID()  <!-- 获取自增的订单uuid -->
+        </selectKey>
+    </insert>
+
+    <update id="updateOrderStatus" parameterType="map">
+        UPDATE orders
+        SET checker = #{checker},
+            check_time = #{checkTime},
+            state = #{state}
+        WHERE uuid = #{orderId}
+    </update>
+
+    <update id="updateOrderStartStatus" parameterType="map">
+        UPDATE orders
+        SET starter = #{starter},
+            start_time = #{startTime},
+            state = #{state}
+        WHERE uuid = #{orderId}
+    </update>
+
+
+</mapper>

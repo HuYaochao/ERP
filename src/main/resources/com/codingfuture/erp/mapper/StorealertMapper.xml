@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.codingfuture.erp.mapper.StorealertMapper">
+
+    <resultMap id="StorealertResultMap" type="com.codingfuture.erp.entity.Storealert" autoMapping="true">
+        <!-- 自定义映射逻辑 -->
+        <result property="storenum" column="storeNum"/>
+        <result property="outnum" column="outNum"/>
+        <result property="name" column="name"/>
+        <result property="uuid" column="uuid"/>
+    </resultMap>
+
+    <select id="getstorealert" resultMap="StorealertResultMap">
+        SELECT
+            vs.uuid as uuid,
+            vs.name as name,
+            vs.store_num as storeNum,
+            vs.out_num as outNum
+            FROM view_storealert as vs
+    </select>
+    <select id="getstorealertCount" resultType="java.lang.Integer">
+        SELECT
+            COUNT(*)
+        FROM view_storealert as vs
+    </select>
+
+</mapper>

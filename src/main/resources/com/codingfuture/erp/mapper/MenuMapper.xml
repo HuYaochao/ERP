@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.codingfuture.erp.mapper.MenuMapper">
+    <!-- 动态查询菜单权限 -->
+    <select id="findMenusByUser" parameterType="String" resultType="com.codingfuture.erp.entity.Menu">
+    SELECT m.*
+    FROM menu m
+    WHERE m.menu_id IN (
+        SELECT DISTINCT rm.menu_uuid
+        FROM role_menu rm
+        WHERE rm.role_uuid IN (
+            SELECT er.role_uuid
+            FROM emp_role er
+            WHERE er.emp_uuid = (
+                SELECT e.uuid
+                FROM emp e
+                WHERE e.username = #{username}
+            )
+        )
+    )
+       OR m.pid = -1
+    ORDER BY m.menu_id;
+</select>
+
+
+</mapper>

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.codingfuture.erp.mapper.SupplierMapper">
+    <sql id="columns">
+        uuid
+        , `name`
+        , address
+        , contact
+        , telephone as tele
+        , email
+    </sql>
+
+    <select id="findListByPage" resultType="com.codingfuture.erp.dto.SupplierDTO">
+        select
+        <include refid="columns"/>
+        from supplier
+        <where>
+            <if test="supplierDTO.name != null and supplierDTO.name != '' ">
+                and name like "%"#{supplierDTO.name}"%"
+            </if>
+            <if test="supplierDTO.address != null and supplierDTO.address != '' ">
+                and address like "%"#{supplierDTO.address}"%"
+            </if>
+            <if test="supplierDTO.contact != null and supplierDTO.contact != '' ">
+                and contact like "%"#{supplierDTO.contact}"%"
+            </if>
+            <if test="supplierDTO.tele != null and supplierDTO.tele != '' ">
+                and telephone like "%"#{supplierDTO.tele}"%"
+            </if>
+            <if test="type != null">
+                and type = #{type}
+            </if>
+        </where>
+
+    </select>
+
+    <select id="findById" resultType="com.codingfuture.erp.dto.SupplierDTO">
+        select refid = "columns" / >
+        from supplier
+        where uuid = #{id}
+    </select>
+    <select id="findCustomers" resultType="com.codingfuture.erp.entity.Supplier">
+        select
+        <include refid="columns"/>
+        from supplier
+        where
+        type = #{type}
+    </select>
+
+    <insert id="add">
+        insert into supplier
+        values (#{supplierDTO.uuid},
+                #{supplierDTO.name},
+                #{supplierDTO.address},
+                #{supplierDTO.contact},
+                #{supplierDTO.tele},
+                #{supplierDTO.email},
+                #{type})
+    </insert>
+    <update id="updateById">
+        update supplier
+        <set>
+            <if test="name != null and name != '' ">
+                name = #{name},
+            </if>
+            <if test="address != null and address != '' ">
+                address = #{address},
+            </if>
+            <if test="contact != null and contact != '' ">
+                contact = #{contact},
+            </if>
+            <if test="tele != null and tele != '' ">
+                telephone = #{tele},
+            </if>
+            <if test="email != null and email != '' ">
+                email = #{email},
+            </if>
+        </set>
+        where
+        uuid = #{uuid}
+    </update>
+    <delete id="deleteById">
+        delete
+        from supplier
+        where uuid = #{id}
+    </delete>
+
+    <select id="findSuppliersByType" resultType="com.codingfuture.erp.entity.Supplier">
+        SELECT uuid, name,type
+        FROM supplier
+        WHERE type = #{type}
+    </select>
+
+</mapper>

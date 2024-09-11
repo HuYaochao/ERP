@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.codingfuture.erp.mapper.MarketMapper">
+
+    <select id="getYear" resultType="com.codingfuture.erp.entity.Market">
+        SELECT *
+        FROM market
+    </select>
+    <select id="getMonthList" resultType="com.codingfuture.erp.dto.MarketDTO">
+        SELECT
+            MONTH(create_time) AS month,
+            ROUND(SUM(total_money),2) AS money
+        FROM
+            market
+        where
+            YEAR(create_time) = #{year}
+        GROUP BY
+            month
+        ORDER BY
+            month
+    </select>
+    <select id="getGoodsTypeList" resultType="com.codingfuture.erp.dto.GoodsTypeDTO">
+        SELECT
+            t.name AS name,
+            sum(money) AS value
+        FROM
+            marketdetail m ,goodstype t ,goods g
+        WHERE
+            m.goods_uuid = g.uuid
+          and t.uuid = g.goods_type_uuid
+        GROUP BY
+            name
+    </select>
+
+</mapper>

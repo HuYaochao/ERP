@@ -1,0 +1,182 @@
+<div class="layui-card layadmin-header">
+    <div class="layui-breadcrumb" lay-filter="breadcrumb">
+        <a lay-href="">主页</a>
+        <a><cite>统计分析</cite></a>
+        <a><cite>月销售统计</cite></a>
+    </div>
+</div>
+<div class="layui-fluid">
+    <div class="layui-card">
+        <div class="layui-card-header">月销售统计</div>
+        <div class="layui-card-body">
+            <div class="layui-row">
+                <div class="layui-col-md4">
+                    <form class="layui-form" lay-filter="year">
+                        <div class="layui-form-item" style="margin-top: 10px;">
+                            <label class="layui-form-label">年份:</label>
+                            <div class="layui-input-block">
+                                <select name="year" id="year" lay-filter="year-select" lay-verify="">
+                                    <option value="">---请选择年份---</option>
+                                    <option value="2021">2021</option>
+                                    <option value="2022">2022</option>
+                                    <option value="2023">2023</option>
+                                    <option value="2024">2024</option>
+                                </select>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="layui-row">
+                <div class="layui-col-md6">
+                    <div class="layui-card">
+                        <div class="layui-card-header"><b>销售趋势表</b></div>
+                        <div class="layui-card-body">
+                            <table id="by-month-table-parseData" lay-filter="by-month-table-parseData"></table>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md6">
+                    <div class="layui-card">
+                        <div class="layui-card-header">
+                            <b>销售趋势图</b>
+                        </div>
+                        <div class="layui-card-body">
+                            <!-- 这里写Echarts -->
+                            <div class="Echarts_month" style="width: 600px; height: 300px;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    layui.use(['table', 'admin', 'form', 'tree', 'echarts'], function () {
+        var admin = layui.admin
+            , table = layui.table
+            , form = layui.form
+            , baseUrl = layui.setter.baseUrl
+            , $ = layui.$
+            , tree = layui.tree
+            , echarts = layui.echarts;
+
+        form.render(null, 'year');
+
+        // 监听年份选择变化
+        form.on('select(year-select)', function (data) {
+            var selectedYear = data.value;
+            if (selectedYear) {
+                loadData(selectedYear);
+            }
+        });
+
+        function getData(newData) {
+            const months = [{month: "1", money: 0},
+                {month: "2", money: 0},
+                {month: "3", money: 0},
+                {month: "4", money: 0},
+                {month: "5", money: 0},
+                {month: "6", money: 0},
+                {month: "7", money: 0},
+                {month: "8", money: 0},
+                {month: "9", money: 0},
+                {month: "10", money: 0},
+                {month: "11", money: 0},
+                {month: "12", money: 0}]
+            for (let i = 0; i < newData.length; i++) {
+                for (let j = 0; j < months.length; j++) {
+                    if (months[j].month === newData[i].month) {
+                        months[j].money = newData[i].money;
+                        break;
+                    }
+                }
+            }
+            return months;
+        }
+
+        function loadData(year) {
+            //第一个实例
+            table.render({
+                    elem: '#by-month-table-parseData'
+                    , url: baseUrl + 'echarts/month'
+                    , where: {
+                        year: year
+                    }
+                    // , cellMinWidth: 120
+                    , loading: true
+                    , method: 'get'
+                    , cols: [[
+                        {field: 'month', title: '月份'}
+                        , {field: 'money', title: '销售额'}
+                    ]]
+                    , response: {
+                        statusCode: 200 //重新规定成功的状态码为 200，table 组件默认为 0
+                    }
+                    , parseData: function (res) { //将原始数据解析成 table 组件所规定的数据
+                        const months = getData(res.data.rows)
+                        return {
+                            "code": res.code,
+                            "msg": res.msg,
+                            "count": months.length, // 永远为 12
+                            "data": months  // 输出填充好的数据
+                        };
+                    }
+                }
+            )
+            ;
+
+            updateData(year);
+        }
+
+        function updateData(year) {
+            admin.req({
+                url: baseUrl + 'echarts/month'
+                , data: {
+                    year: year
+                },
+                done: function (res) {
+                    //echarts图表
+                    var chartDom = $('.Echarts_month');
+                    var myChart = echarts.init(chartDom[0]);
+                    const months = getData(res.data.rows)
+
+                    var option = {
+                        xAxis: {
+                            type: 'category',
+                            data: months.map(
+                                function (item) {
+                                    return item.month;
+                                }
+                            )
+                        },
+                        yAxis: {
+                            type: 'value'
+                        },
+                        series: [{
+                            data: months.map(
+                                function (item) {
+                                    return item.money;
+                                }
+                            ),
+                            type: 'line',
+                            smooth: true,
+                            itemStyle: {
+                                normal: {
+                                    label: {
+                                        show: true
+                                    }
+                                }
+                            }
+                        }]
+                    };
+                    option && myChart.setOption(option, true);
+                }
+            })
+        }
+    })
+    ;
+
+</script>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.codingfuture.erp.mapper.MarketOutMapper">
+    <update id="doOutStore">
+        update marketdetail
+        set state      = 1 ,
+            store_uuid = #{storeuuid}
+        where uuid = #{uuid}
+    </update>
+    <update id="doStart">
+        update market
+        set state    = 1,
+            ender    = #{name},
+            end_time = #{date}
+        where uuid = #{id}
+    </update>
+</mapper>

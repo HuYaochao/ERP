@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.codingfuture.erp.mapper.StoreMapper">
+
+    <resultMap id="StoreResultMap" type="com.codingfuture.erp.entity.Store" autoMapping="true">
+        <!-- 自定义映射逻辑 -->
+        <result property="storeName" column="name"/>
+        <result property="storeuuid" column="uuid"/>
+        <result property="storename" column="name"/>
+        <result property="name" column="name"/>
+        <result property="uuid" column="uuid"/>
+    </resultMap>
+
+    <select id="getStoreList" resultMap="StoreResultMap">
+        SELECT *
+        FROM store
+    </select>
+
+    <select id="storeMapper" resultType="com.codingfuture.erp.dto.StoreGoodsDTO">
+        SELECT
+        s.uuid as uuid,
+        s.name as storeName,
+        g.name as goodsName,
+        d.num as num
+        FROM
+        store s
+        LEFT JOIN storedetail d ON s.uuid = d.store_uuid
+        LEFT JOIN goods g ON d.goods_uuid = g.uuid
+        <where>
+            <if test="storeName!=null">
+                and s.uuid = #{storeName}
+            </if>
+            <if test="goodsName!=null">
+                and g.uuid = #{goodsName}
+            </if>
+        </where>
+    </select>
+
+    <select id="getChangeStoreList" resultMap="StoreResultMap">
+        SELECT *
+        FROM store
+    </select>
+
+    <select id="getStoreDetailCount" resultType="java.lang.Integer">
+        SELECT
+        COUNT(*)
+        FROM
+        store s
+        LEFT JOIN storedetail d ON s.uuid = d.store_uuid
+        LEFT JOIN goods g ON d.goods_uuid = g.uuid
+        <where>
+            <if test="storeName!=null">
+                and s.uuid = #{storeName}
+            </if>
+            <if test="goodsName!=null">
+                and g.uuid = #{goodsName}
+            </if>
+        </where>
+    </select>
+
+    <select id="getStoreByUuid" resultType="com.codingfuture.erp.entity.Store">
+        SELECT *
+        FROM store
+        WHERE uuid = uuid
+    </select>
+
+
+    <sql id="columns">
+        uuid
+        , `name`
+        , emp_uuid empuuid
+    </sql>
+
+    <insert id="add">
+        insert into store
+        values ( #{uuid}
+               , #{name}
+               , #{empuuid})
+    </insert>
+
+    <update id="updateById">
+        update store
+        <set>
+            <if test="name != null and name != '' ">
+                name = #{name},
+            </if>
+            <if test="empuuid != null and empuuid != '' ">
+                emp_uuid = #{empuuid},
+            </if>
+        </set>
+        where
+        uuid = #{uuid}
+    </update>
+
+    <update id="minusNum">
+        update storedetail
+        set
+            num = num - #{num}
+        where
+            store_uuid = #{storeuuid}
+        and goods_uuid = #{goodsuuid}
+    </update>
+
+    <delete id="deleteById">
+        delete
+        from store
+        where uuid = #{id}
+    </delete>
+    <select id="findListByPage" resultType="com.codingfuture.erp.dto.StoreDTO">
+        select
+        <include refid="columns"/>
+        from store
+        <where>
+            <if test="name != null and name != '' ">
+                and name like "%"#{name}"%"
+            </if>
+            <if test="empuuid != null and empuuid != '' ">
+                and emp_uuid = #{empuuid}
+            </if>
+        </where>
+    </select>
+
+    <select id="findById" resultType="com.codingfuture.erp.entity.Store">
+        select
+        <include refid="columns"/>
+        from store
+        where
+        uuid = #{id}
+    </select>
+    <select id="findStore" resultType="com.codingfuture.erp.dto.StoreDTO">
+        select uuid
+             , name
+        from store
+    </select>
+    <select id="findStoreDetail" resultType="com.codingfuture.erp.entity.StoreDetail">
+        select uuid,
+               store_uuid,
+               goods_uuid
+        from storedetail
+    </select>
+    <select id="findByName" resultType="com.codingfuture.erp.dto.StoreDTO">
+        select
+        <include refid="columns"/>
+        from store
+        where
+        `name` = #{name}
+    </select>
+
+
+</mapper>

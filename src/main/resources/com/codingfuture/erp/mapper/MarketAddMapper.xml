@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.codingfuture.erp.mapper.MarketAddMapper">
+    <!--    <insert id="add" useGeneratedKeys="true" keyProperty="uid">-->
+    <!--    </insert>-->
+    <insert id="addMarket" useGeneratedKeys="true" keyProperty="uuid" keyColumn="market_uuid">
+        insert into market
+        (uuid,
+         create_time,
+         creater,
+         supplier_uuid,
+         state ,
+         total_money)
+        values (#{uuid},
+                #{createtime},
+                #{creatername},
+                #{supplieruuid},
+                #{state} ,
+                #{totalmoney});
+    </insert>
+    <insert id="addMarketDetail">
+        insert into marketdetail
+        (goods_uuid,
+         goods_name,
+         price,
+         num,
+         money,
+         state,
+         market_uuid)
+        values (#{goodsuuid},
+                #{goodsname},
+                #{price},
+                #{num},
+                #{money},
+                #{state},
+                #{marketuuid})
+    </insert>
+
+    <select id="findListByPage" resultType="com.codingfuture.erp.dto.MarketAddDTO">
+        select m.uuid,
+               s.name        as suppliername,
+               m.creater     as creatername,
+               m.ender     as endername,
+               m.total_money as totalmoney,
+               m.create_time as createtime,
+               m.end_time    as endtime,
+               m.state
+        from market m ,
+             supplier s
+        where m.supplier_uuid = s.uuid
+          and m.state = #{state}
+    </select>
+    <select id="findGoodsSale" resultType="com.codingfuture.erp.dto.GoodsSaleDTO">
+        select uuid,
+               goods_uuid as goodsuuid,
+               goods_name as goodsname,
+               price,
+               num,
+               money,
+               state,
+               market_uuid,
+               store_uuid
+        from marketdetail
+        where market_uuid = #{marketuuid}
+    </select>
+</mapper>

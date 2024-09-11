@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.codingfuture.erp.mapper.StoreoperMapper">
+    <select id="getStoreList" resultType="com.codingfuture.erp.entity.Storeoper">
+        select * from storeoper
+    </select>
+    <select id="getOperList" resultType="com.codingfuture.erp.dto.OperListDTO">
+        SELECT
+        sp.uuid as uuid,
+        e.name as empName,
+        sp.oper_time as opertime,
+        s.name as storeName,
+        g.name as goodsName,
+        sp.num as num,
+        sp.type as type
+        FROM
+        storeoper sp
+        LEFT JOIN emp e ON e.uuid = sp.emp_uuid
+        LEFT JOIN store s ON s.uuid = sp.store_uuid
+        LEFT JOIN goods g ON g.uuid = sp.goods_uuid
+        <where>
+            <if test="operQueryDTO.empuuid!=null">
+                and sp.emp_uuid = #{operQueryDTO.empuuid}
+            </if>
+            <if test="operQueryDTO.opertime!=null and operQueryDTO.topertime!=null and operQueryDTO.opertime!='' and operQueryDTO.topertime!='' ">
+                and sp.oper_time BETWEEN #{operQueryDTO.opertime} AND #{operQueryDTO.topertime}
+            </if>
+            <if test="operQueryDTO.storeuuid!=null">
+                and sp.store_uuid = #{operQueryDTO.storeuuid}
+            </if>
+            <if test="operQueryDTO.goodsuuid!=null">
+                and sp.goods_uuid = #{operQueryDTO.goodsuuid}
+            </if>
+            <if test="operQueryDTO.type!=null and operQueryDTO.type!=''">
+                and sp.type = #{operQueryDTO.type}
+            </if>
+        </where>
+
+
+    </select>
+    <select id="getOperListCount" resultType="java.lang.Integer">
+        SELECT
+        COUNT(*)
+        FROM
+        storeoper sp
+        LEFT JOIN emp e ON e.uuid = sp.emp_uuid
+        LEFT JOIN store s ON s.uuid = sp.store_uuid
+        LEFT JOIN goods g ON g.uuid = sp.goods_uuid
+        <where>
+            <if test="operQueryDTO.empuuid!=null">
+                and sp.emp_uuid = #{operQueryDTO.empuuid}
+            </if>
+            <if test="operQueryDTO.opertime!=null and operQueryDTO.topertime!=null and operQueryDTO.opertime!='' and operQueryDTO.topertime!='' ">
+                and sp.oper_time BETWEEN #{operQueryDTO.opertime} AND #{operQueryDTO.topertime}
+            </if>
+            <if test="operQueryDTO.storeuuid!=null">
+                and sp.store_uuid = #{operQueryDTO.storeuuid}
+            </if>
+            <if test="operQueryDTO.goodsuuid!=null">
+                and sp.goods_uuid = #{operQueryDTO.goodsuuid}
+            </if>
+            <if test="operQueryDTO.type!=null and operQueryDTO.type!=''">
+                and sp.type = #{operQueryDTO.type}
+            </if>
+        </where>
+
+    </select>
+</mapper>

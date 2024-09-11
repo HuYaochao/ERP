@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.codingfuture.erp.mapper.GoodsMapper">
+    <sql id="columns">
+        uuid
+        , `name`
+        , origin
+        , producer
+        , unit
+        , in_price
+        , out_price
+        , goods_type_uuid as goodsType
+    </sql>
+    <insert id="add">
+        insert into goods
+        values (#{uuid}
+               ,#{name}
+               ,#{origin}
+               ,#{producer}
+               ,#{unit}
+               ,#{inPrice}
+               ,#{outPrice}
+               ,#{goodsType})
+    </insert>
+    <update id="updateById">
+        update goods
+        <set>
+        <if test="name != null">
+            name = #{name},
+        </if>
+        <if test="origin != null">
+            origin = #{origin},
+        </if>
+        <if test="producer != null">
+            producer = #{producer},
+        </if>
+        <if test="unit != null">
+            unit = #{unit},
+        </if>
+        <if test="inPrice != null">
+            in_price = #{inPrice},
+        </if>
+        <if test="outPrice != null">
+            out_price = #{outPrice},
+        </if>
+        <if test="goodsType != null">
+            goods_type_uuid = #{goodsType},
+        </if>
+    </set>
+        where
+            uuid = #{uuid}
+    </update>
+    <delete id="deleteById">
+        delete from goods
+        where
+            uuid = #{id}
+    </delete>
+
+    <select id="findListByPage" resultType="com.codingfuture.erp.dto.TypeGoodsDTO">
+        select
+            g.uuid
+            , g.name
+            , g.origin
+            , g.producer
+            , g.unit
+            , g.in_price
+            , g.out_price
+            , t.name as goodsType
+        from goods g
+        left join goodstype t
+            ON g.goods_type_uuid = t.uuid
+        <where>
+            <if test="name != null and name != '' ">
+                and g.name like "%"#{name}"%"
+            </if>
+            <if test="origin != null and origin != '' ">
+                and g.origin like "%"#{origin}"%"
+            </if>
+            <if test="producer != null and producer != '' ">
+                and g.producer like "%"#{producer}"%"
+            </if>
+            <if test="unit != null and unit != '' ">
+                and g.unit like "%"#{unit}"%"
+            </if>
+            <if test="inPrice != null and inPrice != '' ">
+                and g.in_price = #{inPrice}
+            </if>
+            <if test="outPrice != null and outPrice != '' ">
+                and g.out_price = #{outPrice}
+            </if>
+            <if test="goodsType != null and goodsType != '' ">
+                and t.name like "%"#{goodsType}"%"
+            </if>
+        </where>
+    </select>
+
+    <select id="findById" resultType="com.codingfuture.erp.dto.TypeGoodsDTO">
+        select
+        <include refid="columns"/>
+        from goods
+        where
+        uuid = #{id}
+    </select>
+
+    <select id="findByName" resultType="com.codingfuture.erp.entity.GoodsType">
+        select
+        <include refid="columns"/>
+        from goods
+        where
+        `name` = #{name}
+    </select>
+
+    <select id="check" resultType="com.codingfuture.erp.entity.Goods">
+        select
+            <include refid="columns"/>
+        from goods
+        where
+            goods_type_uuid = #{foreignKeyId}
+    </select>
+
+    <select id="findAllGoods" resultType="com.codingfuture.erp.dto.GoodsSaleDTO">
+        select
+            g.uuid as goodsuuid
+            , g.name as goodsname
+            , g.out_price as price
+            , s.store_uuid as storeuuid
+        from goods g , storedetail s
+        where g.uuid = s.goods_uuid
+    </select>
+
+
+
+
+    <resultMap id="StoreResultMap" type="com.codingfuture.erp.entity.Goods" autoMapping="true">
+        <!-- 自定义映射逻辑 -->
+        <result property="goodsname" column="name"/>
+        <result property="goodsuuid" column="uuid"/>
+        <result property="goodsName" column="name"/>
+        <result property="name" column="name"/>
+        <result property="uuid" column="uuid"/>
+    </resultMap>
+
+    <select id="getGoodsList" resultMap="StoreResultMap">
+        select * from goods
+    </select>
+    <select id="getChangeGoodsList" resultMap="StoreResultMap">
+        select * from goods
+    </select>
+
+
+
+</mapper>

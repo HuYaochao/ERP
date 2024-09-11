@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.codingfuture.erp.mapper.GoodsTypeMapper">
+
+    <sql id="columns">
+        uuid
+        , `name`
+    </sql>
+
+    <insert id="add">
+        insert into goodstype
+            (`name`)
+            values (#{name})
+    </insert>
+
+    <update id="updateById">
+        update goodstype
+        <set>
+            <if test="name != null and name != ''">
+                name = #{name},
+            </if>
+        </set>
+        where
+        uuid = #{uuid}
+    </update>
+
+    <delete id="deleteById">
+        delete
+        from goodstype
+        where uuid = #{id}
+    </delete>
+
+    <select id="findListByPage" resultType="com.codingfuture.erp.entity.GoodsType">
+        select
+        <include refid="columns"/>
+        from goodstype
+        <where>
+            <if test="name != null and name != ''">
+                and name like "%"#{name}"%"
+            </if>
+        </where>
+    </select>
+    <select id="findById" resultType="com.codingfuture.erp.entity.GoodsType">
+        select
+        <include refid="columns"/>
+        from goodstype
+        where
+        uuid = #{id}
+    </select>
+
+    <select id="findType" resultType="com.codingfuture.erp.entity.GoodsType">
+        select
+        <include refid="columns"/>
+        from goodstype
+    </select>
+    <select id="findByName" resultType="com.codingfuture.erp.entity.GoodsType">
+        select
+        <include refid="columns"/>
+        from goodstype
+        where
+        `name` = #{name}
+    </select>
+
+
+</mapper>

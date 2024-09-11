@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.codingfuture.erp.mapper.ReturnOrderMapper">
+    <select id="selectReturnOrdersByPage" resultType="com.codingfuture.erp.entity.Order">
+        SELECT
+            o.uuid AS uuid,
+            o.create_time AS create_time,
+            o.check_time AS check_time,
+            o.end_time AS end_time,
+            o.type AS  type,
+            e1.username AS creatername,
+            e2.username AS checkername,
+            e4.username AS endername,
+            s.name AS suppliername,
+            o.supplier_uuid As supplieruuid,
+            o.total_money AS total_money,
+            o.state AS state,
+            o.waybills AS waybills
+        FROM
+            returnorders o
+                LEFT JOIN emp e1 ON o.creater = e1.uuid
+                LEFT JOIN emp e2 ON o.checker = e2.uuid
+                LEFT JOIN emp e4 ON o.ender = e4.uuid
+                LEFT JOIN supplier s ON o.supplier_uuid = s.uuid
+        WHERE
+            o.state = #{state}
+        ORDER BY
+            o.create_time DESC
+            LIMIT
+            #{offset}, #{limit}
+    </select>
+
+    <select id="countReturnOrders" resultType="int">
+        SELECT COUNT(*) FROM returnorders
+        WHERE state = #{state}
+    </select>
+</mapper>

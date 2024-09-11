@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.codingfuture.erp.mapper.InventoryMapper">
+    <insert id="addInventory">
+        INSERT into inventory (store_uuid,goods_uuid,type,remark,num,create_time) values
+                        (#{inventory.storeUuid},#{inventory.goodsUuid},#{inventory.type},#{inventory.remark},#{inventory.num},#{inventory.createTime})
+    </insert>
+    <update id="updateInventory">
+        UPDATE inventory
+        SET uuid       = #{uuid},
+            goods_uuid = #{goodsuuid},
+            store_uuid = #{storeuuid},
+            num        = #{num},
+            type       = #{type},
+            remark     = #{remark}
+        where uuid = #{uuid}
+
+    </update>
+    <delete id="deleteInventory">
+        DELETE FROM inventory
+        where uuid = #{uuid}
+    </delete>
+    <select id="getInventoryListByPage" resultType="com.codingfuture.erp.dto.InventoryQueryDTO">
+        SELECT
+               i.uuid as uuid,
+               g.name as goodsname,
+               s.name as storename,
+               i.num  as num,
+               i.type as type,
+               i.create_time as createtime,
+               i.check_time as checktime,
+               i.creater as creater,
+               i.checker as checker,
+               i.state as state,
+               i.remark as remark
+        FROM
+            inventory as i
+            LEFT JOIN goods as g ON g.uuid=i.goods_uuid
+            LEFT JOIN store as s ON s.uuid=i.store_uuid
+        <where>
+            <if test="goodsname != null and goodsname!=''">
+                and g.name = #{goodsname}
+            </if>
+            <if test="storename !=null and storename!=''">
+                and s.name = #{storename}
+            </if>
+            <if test="num != null ">
+                and i.num = #{num}
+            </if>
+            <if test="type != null and type!=''">
+                and i.type = #{type}
+            </if>
+            <if test="createtime != null and createtime !=''">
+                and i.create_time = #{createtime}
+            </if>
+            <if test="checktime != null and checktime!=''">
+                and i.check_time = #{checktime}
+            </if>
+            <if test="creater != null and creater!=''">
+                and i.creater = #{creater}
+            </if>
+            <if test="checker != null and checker!=''">
+                and i.checker = #{checker}
+            </if>
+            <if test="state != null and state!=''">
+                and i.state = #{state}
+            </if>
+            <if test="remark != null and remark!=''">
+                and i.remark = #{remark}
+            </if>
+        </where>
+
+
+
+    </select>
+    <select id="getSelectone" resultType="com.codingfuture.erp.dto.InventoryQueryDTO">
+        SELECT
+        g.uuid as goodsuuid,
+        s.uuid as storeuuid,
+        i.uuid as uuid,
+        g.name as goodsname,
+        s.name as storename,
+        i.num  as num,
+        i.type as type,
+        i.create_time as createtime,
+        i.check_time as checktime,
+        i.creater as creater,
+        i.checker as checker,
+        i.state as state,
+        i.remark as remark
+        FROM
+        inventory as i
+        LEFT JOIN goods as g ON g.uuid=i.goods_uuid
+        LEFT JOIN store as s ON s.uuid=i.store_uuid
+       where i.uuid = #{id}
+    </select>
+</mapper>

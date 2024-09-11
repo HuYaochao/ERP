@@ -1,0 +1,611 @@
+卷 Play 的文件夹 PATH 列表
+卷序列号为 E277-AA84
+E:.
+│  .gitignore
+│  pom.xml
+│  project-structure.txt
+│  
+├─.idea
+│  │  compiler.xml
+│  │  encodings.xml
+│  │  jarRepositories.xml
+│  │  misc.xml
+│  │  uiDesigner.xml
+│  │  vcs.xml
+│  │  workspace.xml
+│  │  
+│  ├─inspectionProfiles
+│  │      Project_Default.xml
+│  │      
+│  └─shelf
+│      │  Uncommitted_changes_before_Update_at_2024_9_5_10_34__Changes_.xml
+│      │  Uncommitted_changes_before_Update_at_2024_9_5_10_34__Changes_1.xml
+│      │  
+│      ├─Uncommitted_changes_before_Update_at_2024_9_5_10_34_[Changes]
+│      │      shelved.patch
+│      │      
+│      └─Uncommitted_changes_before_Update_at_2024_9_5_10_34_[Changes]1
+│              shelved.patch
+│              
+├─src
+│  ├─main
+│  │  ├─java
+│  │  │  └─com
+│  │  │      └─codingfuture
+│  │  │          └─erp
+│  │  │              │  ErpApplication.java
+│  │  │              │  
+│  │  │              ├─config
+│  │  │              │      MinioConfig.java
+│  │  │              │      WebConfig.java
+│  │  │              │      
+│  │  │              ├─constant
+│  │  │              │      MarketConstant.java
+│  │  │              │      ResultConstant.java
+│  │  │              │      
+│  │  │              ├─dto
+│  │  │              │      AddInventoryQueryDTO.java
+│  │  │              │      CombinedOrderDTO.java
+│  │  │              │      GoodsNumDTO.java
+│  │  │              │      GoodsSaleDTO.java
+│  │  │              │      GoodsTypeDTO.java
+│  │  │              │      InventoryQueryDTO.java
+│  │  │              │      LoginDTO.java
+│  │  │              │      MarketAddDTO.java
+│  │  │              │      MarketDto.java
+│  │  │              │      MenuDTO.java
+│  │  │              │      OperListDTO.java
+│  │  │              │      OperQueryDTO.java
+│  │  │              │      OrderDetailDTO.java
+│  │  │              │      OrderDTO.java
+│  │  │              │      StoreDTO.java
+│  │  │              │      StoreGoodsDTO.java
+│  │  │              │      SupplierDTO.java
+│  │  │              │      TypeGoodsDTO.java
+│  │  │              │      
+│  │  │              ├─entity
+│  │  │              │      Emp.java
+│  │  │              │      Goods.java
+│  │  │              │      GoodsType.java
+│  │  │              │      Inventory.java
+│  │  │              │      Market.java
+│  │  │              │      MarketDetail.java
+│  │  │              │      Menu.java
+│  │  │              │      Order.java
+│  │  │              │      OrderDetail.java
+│  │  │              │      Store.java
+│  │  │              │      Storealert.java
+│  │  │              │      StoreDetail.java
+│  │  │              │      Storeoper.java
+│  │  │              │      Supplier.java
+│  │  │              │      
+│  │  │              ├─mapper
+│  │  │              │      EmpMapper.java
+│  │  │              │      GoodsMapper.java
+│  │  │              │      GoodsTypeMapper.java
+│  │  │              │      InventoryMapper.java
+│  │  │              │      MarketAddMapper.java
+│  │  │              │      MarketMapper.java
+│  │  │              │      MarketOutMapper.java
+│  │  │              │      MenuMapper.java
+│  │  │              │      OrderDetailMapper.java
+│  │  │              │      OrderMapper.java
+│  │  │              │      ReturnOrderMapper.java
+│  │  │              │      StorealertMapper.java
+│  │  │              │      StoreMapper.java
+│  │  │              │      StoreoperMapper.java
+│  │  │              │      SupplierMapper.java
+│  │  │              │      
+│  │  │              ├─ov
+│  │  │              ├─service
+│  │  │              │  │  EmpService.java
+│  │  │              │  │  GoodsService.java
+│  │  │              │  │  GoodsTypeService.java
+│  │  │              │  │  InventoryService.java
+│  │  │              │  │  MarketAddService.java
+│  │  │              │  │  MarketOutService.java
+│  │  │              │  │  MarketService.java
+│  │  │              │  │  MenuService.java
+│  │  │              │  │  OrderDetailService.java
+│  │  │              │  │  OrderService.java
+│  │  │              │  │  ReturnOrderService.java
+│  │  │              │  │  StorealertService.java
+│  │  │              │  │  StoreoperService.java
+│  │  │              │  │  StoreService.java
+│  │  │              │  │  SupplierService.java
+│  │  │              │  │  
+│  │  │              │  └─impl
+│  │  │              │          EmpServiceImpl.java
+│  │  │              │          GoodsServiceImpl.java
+│  │  │              │          GoodsTypeServiceImpl.java
+│  │  │              │          InventoryServiceImpl.java
+│  │  │              │          MarketAddServiceImpl.java
+│  │  │              │          MarketOutServiceImpl.java
+│  │  │              │          MarketServiceImpl.java
+│  │  │              │          MenuServiceImpl.java
+│  │  │              │          OrderDetailServiceImpl.java
+│  │  │              │          OrderServiceImpl.java
+│  │  │              │          ReturnOrderServiceImpl.java
+│  │  │              │          StorealertServiceImpl.java
+│  │  │              │          StoreoperServiceImpl.java
+│  │  │              │          StoreServiceImpl.java
+│  │  │              │          SupplierServiceImpl.java
+│  │  │              │          
+│  │  │              ├─util
+│  │  │              │      DataResult.java
+│  │  │              │      MarketDetailUtil.java
+│  │  │              │      MenuUtils.java
+│  │  │              │      Result.java
+│  │  │              │      SmsUtil.java
+│  │  │              │      
+│  │  │              └─web
+│  │  │                  ├─controller
+│  │  │                  │      EchartsController.java
+│  │  │                  │      EmpController.java
+│  │  │                  │      GoodsController.java
+│  │  │                  │      GoodsTypeController.java
+│  │  │                  │      InventoryController.java
+│  │  │                  │      LoginController.java
+│  │  │                  │      MarketAddController.java
+│  │  │                  │      MarketOutController.java
+│  │  │                  │      MenuController.java
+│  │  │                  │      OrderController.java
+│  │  │                  │      ReturnOrderController.java
+│  │  │                  │      SmsController.java
+│  │  │                  │      StorealertController.java
+│  │  │                  │      StoreChangeController.java
+│  │  │                  │      StoreController.java
+│  │  │                  │      StoreoperController.java
+│  │  │                  │      SupplierController.java
+│  │  │                  │      UserController.java
+│  │  │                  │      
+│  │  │                  └─interceptor
+│  │  │                          LoginInterceptor.java
+│  │  │                          
+│  │  └─resources
+│  │      │  application.properties
+│  │      │  
+│  │      ├─com
+│  │      │  └─codingfuture
+│  │      │      └─erp
+│  │      │          └─mapper
+│  │      │                  EmpMapper.xml
+│  │      │                  GoodsMapper.xml
+│  │      │                  GoodsTypeMapper.xml
+│  │      │                  InventoryMapper.xml
+│  │      │                  MarketAddMapper.xml
+│  │      │                  MarketMapper.xml
+│  │      │                  MarketOutMapper.xml
+│  │      │                  MenuMapper.xml
+│  │      │                  OrderDetailMapper.xml
+│  │      │                  OrderMapper.xml
+│  │      │                  ReturnOrderMapper.xml
+│  │      │                  StorealertMapper.xml
+│  │      │                  StoreMapper.xml
+│  │      │                  StoreoperMapper.xml
+│  │      │                  SupplierMapper.xml
+│  │      │                  
+│  │      └─static
+│  │          │  favicon.ico
+│  │          │  gulpfile.js
+│  │          │  index.html
+│  │          │  login.html
+│  │          │  package-lock.json
+│  │          │  package.json
+│  │          │  
+│  │          ├─src
+│  │          │  │  config.js
+│  │          │  │  index.js
+│  │          │  │  
+│  │          │  ├─controller
+│  │          │  │      common.js
+│  │          │  │      console.js
+│  │          │  │      set.js
+│  │          │  │      user.js
+│  │          │  │      
+│  │          │  ├─lib
+│  │          │  │  │  admin.js
+│  │          │  │  │  view.js
+│  │          │  │  │  
+│  │          │  │  └─extend
+│  │          │  │          echarts.js
+│  │          │  │          echartsTheme.js
+│  │          │  │          
+│  │          │  ├─style
+│  │          │  │  │  admin.css
+│  │          │  │  │  login.css
+│  │          │  │  │  template.css
+│  │          │  │  │  
+│  │          │  │  └─res
+│  │          │  │      │  bg-none.jpg
+│  │          │  │      │  layui-logo.jpg
+│  │          │  │      │  logo-black.png
+│  │          │  │      │  logo.png
+│  │          │  │      │  
+│  │          │  │      └─template
+│  │          │  │              character.jpg
+│  │          │  │              huge.jpg
+│  │          │  │              portrait.png
+│  │          │  │              
+│  │          │  └─views
+│  │          │      │  index.html
+│  │          │      │  layout.html
+│  │          │      │  
+│  │          │      ├─authority
+│  │          │      │      reset_password.html
+│  │          │      │      role_authority.html
+│  │          │      │      role_manage.html
+│  │          │      │      user_role.html
+│  │          │      │      
+│  │          │      ├─base
+│  │          │      │      customer.html
+│  │          │      │      goods.html
+│  │          │      │      goods_type.html
+│  │          │      │      store.html
+│  │          │      │      supplier.html
+│  │          │      │      
+│  │          │      ├─error
+│  │          │      │      404.html
+│  │          │      │      error.html
+│  │          │      │      
+│  │          │      ├─market
+│  │          │      │      orders_add.html
+│  │          │      │      orders_list.html
+│  │          │      │      orders_out.html
+│  │          │      │      
+│  │          │      ├─personnel
+│  │          │      │      dep.html
+│  │          │      │      emp.html
+│  │          │      │      
+│  │          │      ├─purchase
+│  │          │      │      orders_add.html
+│  │          │      │      orders_check.html
+│  │          │      │      orders_confirm.html
+│  │          │      │      orders_in.html
+│  │          │      │      orders_list.html
+│  │          │      │      orders_return_add.html
+│  │          │      │      orders_return_check.html
+│  │          │      │      orders_return_list.html
+│  │          │      │      orders_return_out.html
+│  │          │      │      
+│  │          │      ├─statistics
+│  │          │      │      by_month.html
+│  │          │      │      by_type.html
+│  │          │      │      
+│  │          │      ├─stock
+│  │          │      │      alert.html
+│  │          │      │      change_list.html
+│  │          │      │      inventory.html
+│  │          │      │      list.html
+│  │          │      │      
+│  │          │      └─system
+│  │          │              about.html
+│  │          │              reset_pwd.html
+│  │          │              
+│  │          └─start
+│  │              ├─json
+│  │              │  └─echarts
+│  │              │          sxt.json
+│  │              │          zxt.json
+│  │              │          
+│  │              └─layui
+│  │                  │  layui.js
+│  │                  │  
+│  │                  ├─css
+│  │                  │  │  layui.css
+│  │                  │  │  
+│  │                  │  └─modules
+│  │                  │      │  code.css
+│  │                  │      │  
+│  │                  │      ├─laydate
+│  │                  │      │  └─default
+│  │                  │      │          laydate.css
+│  │                  │      │          
+│  │                  │      └─layer
+│  │                  │          └─default
+│  │                  │                  icon-ext.png
+│  │                  │                  icon.png
+│  │                  │                  layer.css
+│  │                  │                  loading-0.gif
+│  │                  │                  loading-1.gif
+│  │                  │                  loading-2.gif
+│  │                  │                  
+│  │                  └─font
+│  │                          iconfont.eot
+│  │                          iconfont.svg
+│  │                          iconfont.ttf
+│  │                          iconfont.woff
+│  │                          iconfont.woff2
+│  │                          
+│  └─test
+│      └─java
+│          └─com
+│              └─codingfuture
+│                  └─erp
+│                          ErpApplicationTests.java
+│                          
+└─target
+    ├─classes
+    │  │  application.properties
+    │  │  
+    │  ├─com
+    │  │  └─codingfuture
+    │  │      └─erp
+    │  │          │  ErpApplication.class
+    │  │          │  
+    │  │          ├─config
+    │  │          │      MinioConfig.class
+    │  │          │      WebConfig$1.class
+    │  │          │      WebConfig.class
+    │  │          │      
+    │  │          ├─constant
+    │  │          │      MarketConstant.class
+    │  │          │      ResultConstant.class
+    │  │          │      
+    │  │          ├─dto
+    │  │          │      AddInventoryQueryDTO.class
+    │  │          │      CombinedOrderDTO.class
+    │  │          │      GoodsNumDTO.class
+    │  │          │      GoodsSaleDTO.class
+    │  │          │      GoodsTypeDTO.class
+    │  │          │      InventoryQueryDTO.class
+    │  │          │      LoginDTO.class
+    │  │          │      MarketAddDTO.class
+    │  │          │      MarketDto.class
+    │  │          │      MenuDTO.class
+    │  │          │      OperListDTO.class
+    │  │          │      OperQueryDTO.class
+    │  │          │      OrderDetailDTO.class
+    │  │          │      OrderDTO.class
+    │  │          │      StoreDTO.class
+    │  │          │      StoreGoodsDTO.class
+    │  │          │      SupplierDTO.class
+    │  │          │      TypeGoodsDTO.class
+    │  │          │      
+    │  │          ├─entity
+    │  │          │      Emp.class
+    │  │          │      Goods.class
+    │  │          │      GoodsType.class
+    │  │          │      Inventory.class
+    │  │          │      Market.class
+    │  │          │      MarketDetail.class
+    │  │          │      Menu.class
+    │  │          │      Order.class
+    │  │          │      OrderDetail.class
+    │  │          │      Store.class
+    │  │          │      Storealert.class
+    │  │          │      StoreDetail.class
+    │  │          │      Storeoper.class
+    │  │          │      Supplier.class
+    │  │          │      
+    │  │          ├─mapper
+    │  │          │      EmpMapper.class
+    │  │          │      EmpMapper.xml
+    │  │          │      GoodsMapper.class
+    │  │          │      GoodsMapper.xml
+    │  │          │      GoodsTypeMapper.class
+    │  │          │      GoodsTypeMapper.xml
+    │  │          │      InventoryMapper.class
+    │  │          │      InventoryMapper.xml
+    │  │          │      MarketAddMapper.class
+    │  │          │      MarketAddMapper.xml
+    │  │          │      MarketMapper.class
+    │  │          │      MarketMapper.xml
+    │  │          │      MarketOutMapper.class
+    │  │          │      MarketOutMapper.xml
+    │  │          │      MenuMapper.class
+    │  │          │      MenuMapper.xml
+    │  │          │      OrderDetailMapper.class
+    │  │          │      OrderDetailMapper.xml
+    │  │          │      OrderMapper.class
+    │  │          │      OrderMapper.xml
+    │  │          │      ReturnOrderMapper.class
+    │  │          │      ReturnOrderMapper.xml
+    │  │          │      StorealertMapper.class
+    │  │          │      StorealertMapper.xml
+    │  │          │      StoreMapper.class
+    │  │          │      StoreMapper.xml
+    │  │          │      StoreoperMapper.class
+    │  │          │      StoreoperMapper.xml
+    │  │          │      SupplierMapper.class
+    │  │          │      SupplierMapper.xml
+    │  │          │      
+    │  │          ├─service
+    │  │          │  │  EmpService.class
+    │  │          │  │  GoodsService.class
+    │  │          │  │  GoodsTypeService.class
+    │  │          │  │  InventoryService.class
+    │  │          │  │  MarketAddService.class
+    │  │          │  │  MarketOutService.class
+    │  │          │  │  MarketService.class
+    │  │          │  │  MenuService.class
+    │  │          │  │  OrderDetailService.class
+    │  │          │  │  OrderService.class
+    │  │          │  │  ReturnOrderService.class
+    │  │          │  │  StorealertService.class
+    │  │          │  │  StoreoperService.class
+    │  │          │  │  StoreService.class
+    │  │          │  │  SupplierService.class
+    │  │          │  │  
+    │  │          │  └─impl
+    │  │          │          EmpServiceImpl.class
+    │  │          │          GoodsServiceImpl.class
+    │  │          │          GoodsTypeServiceImpl.class
+    │  │          │          InventoryServiceImpl.class
+    │  │          │          MarketAddServiceImpl.class
+    │  │          │          MarketOutServiceImpl.class
+    │  │          │          MarketServiceImpl.class
+    │  │          │          MenuServiceImpl.class
+    │  │          │          OrderDetailServiceImpl.class
+    │  │          │          OrderServiceImpl.class
+    │  │          │          ReturnOrderServiceImpl.class
+    │  │          │          StorealertServiceImpl.class
+    │  │          │          StoreoperServiceImpl.class
+    │  │          │          StoreServiceImpl.class
+    │  │          │          SupplierServiceImpl.class
+    │  │          │          
+    │  │          ├─util
+    │  │          │      DataResult.class
+    │  │          │      MarketDetailUtil.class
+    │  │          │      MenuUtils.class
+    │  │          │      Result.class
+    │  │          │      SmsUtil.class
+    │  │          │      
+    │  │          └─web
+    │  │              ├─controller
+    │  │              │      EchartsController.class
+    │  │              │      EmpController.class
+    │  │              │      GoodsController.class
+    │  │              │      GoodsTypeController.class
+    │  │              │      InventoryController.class
+    │  │              │      LoginController.class
+    │  │              │      MarketAddController.class
+    │  │              │      MarketOutController.class
+    │  │              │      MenuController.class
+    │  │              │      OrderController.class
+    │  │              │      ReturnOrderController.class
+    │  │              │      SmsController.class
+    │  │              │      StorealertController.class
+    │  │              │      StoreChangeController.class
+    │  │              │      StoreController.class
+    │  │              │      StoreoperController.class
+    │  │              │      SupplierController.class
+    │  │              │      UserController.class
+    │  │              │      
+    │  │              └─interceptor
+    │  │                      LoginInterceptor.class
+    │  │                      
+    │  └─static
+    │      │  favicon.ico
+    │      │  gulpfile.js
+    │      │  index.html
+    │      │  login.html
+    │      │  package-lock.json
+    │      │  package.json
+    │      │  
+    │      ├─src
+    │      │  │  config.js
+    │      │  │  index.js
+    │      │  │  
+    │      │  ├─controller
+    │      │  │      common.js
+    │      │  │      console.js
+    │      │  │      set.js
+    │      │  │      user.js
+    │      │  │      
+    │      │  ├─lib
+    │      │  │  │  admin.js
+    │      │  │  │  view.js
+    │      │  │  │  
+    │      │  │  └─extend
+    │      │  │          echarts.js
+    │      │  │          echartsTheme.js
+    │      │  │          
+    │      │  ├─style
+    │      │  │  │  admin.css
+    │      │  │  │  login.css
+    │      │  │  │  template.css
+    │      │  │  │  
+    │      │  │  └─res
+    │      │  │      │  bg-none.jpg
+    │      │  │      │  layui-logo.jpg
+    │      │  │      │  logo-black.png
+    │      │  │      │  logo.png
+    │      │  │      │  
+    │      │  │      └─template
+    │      │  │              character.jpg
+    │      │  │              huge.jpg
+    │      │  │              portrait.png
+    │      │  │              
+    │      │  └─views
+    │      │      │  index.html
+    │      │      │  layout.html
+    │      │      │  
+    │      │      ├─authority
+    │      │      │      reset_password.html
+    │      │      │      role_authority.html
+    │      │      │      role_manage.html
+    │      │      │      user_role.html
+    │      │      │      
+    │      │      ├─base
+    │      │      │      customer.html
+    │      │      │      goods.html
+    │      │      │      goods_type.html
+    │      │      │      store.html
+    │      │      │      supplier.html
+    │      │      │      
+    │      │      ├─error
+    │      │      │      404.html
+    │      │      │      error.html
+    │      │      │      
+    │      │      ├─market
+    │      │      │      orders_add.html
+    │      │      │      orders_list.html
+    │      │      │      orders_out.html
+    │      │      │      
+    │      │      ├─personnel
+    │      │      │      dep.html
+    │      │      │      emp.html
+    │      │      │      
+    │      │      ├─purchase
+    │      │      │      orders_add.html
+    │      │      │      orders_check.html
+    │      │      │      orders_confirm.html
+    │      │      │      orders_in.html
+    │      │      │      orders_list.html
+    │      │      │      orders_return_add.html
+    │      │      │      orders_return_check.html
+    │      │      │      orders_return_list.html
+    │      │      │      orders_return_out.html
+    │      │      │      
+    │      │      ├─statistics
+    │      │      │      by_month.html
+    │      │      │      by_type.html
+    │      │      │      
+    │      │      ├─stock
+    │      │      │      alert.html
+    │      │      │      change_list.html
+    │      │      │      inventory.html
+    │      │      │      list.html
+    │      │      │      
+    │      │      └─system
+    │      │              about.html
+    │      │              reset_pwd.html
+    │      │              
+    │      └─start
+    │          ├─json
+    │          │  └─echarts
+    │          │          sxt.json
+    │          │          zxt.json
+    │          │          
+    │          └─layui
+    │              │  layui.js
+    │              │  
+    │              ├─css
+    │              │  │  layui.css
+    │              │  │  
+    │              │  └─modules
+    │              │      │  code.css
+    │              │      │  
+    │              │      ├─laydate
+    │              │      │  └─default
+    │              │      │          laydate.css
+    │              │      │          
+    │              │      └─layer
+    │              │          └─default
+    │              │                  icon-ext.png
+    │              │                  icon.png
+    │              │                  layer.css
+    │              │                  loading-0.gif
+    │              │                  loading-1.gif
+    │              │                  loading-2.gif
+    │              │                  
+    │              └─font
+    │                      iconfont.eot
+    │                      iconfont.svg
+    │                      iconfont.ttf
+    │                      iconfont.woff
+    │                      iconfont.woff2
+    │                      
+    └─generated-sources
+        └─annotations

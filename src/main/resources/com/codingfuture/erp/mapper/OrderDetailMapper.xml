@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.codingfuture.erp.mapper.OrderDetailMapper">
+    <select id="selectOrderDetailsByPage" resultType="com.codingfuture.erp.entity.OrderDetail">
+        SELECT
+            od.uuid AS uuid,
+            g.name AS goodsname,
+            od.price AS price,
+            od.num AS num,
+            od.money AS money,
+            e.username AS endername,
+            s.name AS storename,
+            od.state AS state,
+            od.orders_uuid AS ordersuuid
+        FROM
+            orderdetail od
+                LEFT JOIN goods g ON od.goods_uuid = g.uuid
+                LEFT JOIN emp e ON od.ender = e.uuid
+                LEFT JOIN store s ON od.store_uuid = s.uuid
+        ORDER BY
+            od.uuid ASC
+            LIMIT #{offset}, #{limit}
+    </select>
+
+    <select id="countOrderDetails" resultType="long">
+        SELECT COUNT(*) FROM orderdetail od
+        WHERE 1=1
+
+    </select>
+
+    <select id="selectOrderDetailsByOrderId" resultType="com.codingfuture.erp.entity.OrderDetail">
+
+    </select>
+
+    <select id="selectByOrderUuids" parameterType="list" resultType="com.codingfuture.erp.dto.OrderDetailDTO">
+        SELECT
+            od.uuid AS uuid,
+            g.name AS goodsname,
+            od.price AS price,
+            od.num AS num,
+            od.money AS money,
+            e.username AS endername,
+            s.name AS storename,
+            od.state AS state,
+            od.orders_uuid AS ordersuuid
+        FROM
+            orderdetail od
+                LEFT JOIN goods g ON od.goods_uuid = g.uuid
+                LEFT JOIN emp e ON od.ender = e.uuid
+                LEFT JOIN store s ON od.store_uuid = s.uuid
+        WHERE
+            od.orders_uuid IN (#{orderUuids})
+    </select>
+
+    <insert id="insertOrderDetails" parameterType="java.util.List">
+        INSERT INTO orderdetail (goods_uuid, goods_name, price, num, money, orders_uuid)
+        VALUES
+        <foreach collection="list" item="detail" separator=",">
+            (#{detail.goodsUuid}, #{detail.goodsName}, #{detail.price}, #{detail.num}, #{detail.money}, #{detail.ordersUuid})
+        </foreach>
+    </insert>
+
+    <select id="selectOrderDetailsByOrders" parameterType="map" resultType="com.codingfuture.erp.entity.OrderDetail">
+        SELECT
+        uuid,
+        goods_uuid AS goodsUuid,
+        goods_name AS goodsName,
+        price,
+        num,
+        money,
+        end_time AS endTime,
+        ender AS enderName,
+        store_uuid AS storeUuid,
+        state,
+        orders_uuid AS ordersUuid
+        FROM
+        orderdetail
+        WHERE
+        orders_uuid IN
+        <foreach item="item" index="index" collection="orderIds" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
+
+
+</mapper>

@@ -9,11 +9,11 @@ import com.aliyun.teautil.models.RuntimeOptions;
 
 public class SmsUtil {
 
-    private static final String ACCESS_KEY_ID = "LTAI5t6frzQvZ2jfnWyaWtpP";
-    private static final String ACCESS_KEY_SECRET = "AwNOX2m1mSkmuivBk5CHqt0zAuVew1";
-    private static final String ENDPOINT = "dysmsapi.aliyuncs.com";
-    private static final String SIGN_NAME = "码上未来管理系统";
-    private static final String TEMPLATE_CODE = "SMS_472455407";
+    private static final String ACCESS_KEY_ID = "";
+    private static final String ACCESS_KEY_SECRET = "";
+    private static final String ENDPOINT = "";
+    private static final String SIGN_NAME = "";
+    private static final String TEMPLATE_CODE = "";
 
     /**
      * 创建阿里云 SMS 客户端
